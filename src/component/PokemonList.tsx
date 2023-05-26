@@ -33,7 +33,7 @@ export default function PokemonList() {
 
 	return (
 		<>
-			<div className="py-5 grid gap-2 sm:grid-cols-2 md:grid-cols-4">
+			<div className="py-5 grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				{data?.pages.map((page) => {
 					return page.results.map((result) => {
 						const key = result.url.split("/")[6]

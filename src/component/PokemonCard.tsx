@@ -3,8 +3,10 @@ import { getPokemonByUrl } from "../api/pokemonAPI"
 import PokemonUrl from "../interface/pokemonUrl"
 import PokemonInfo from "../interface/pokemonInfo"
 import { getColorByElement } from "../utils/color"
+import { useNavigate } from "react-router-dom"
 
 export default function PokemonCard({ name, url }: PokemonUrl) {
+	const navigate = useNavigate()
 	const { data, isLoading, isError } = useQuery<PokemonInfo>({
 		queryKey: ["getPokemonByUrl", name],
 		queryFn: () => getPokemonByUrl(url),
@@ -21,14 +23,17 @@ export default function PokemonCard({ name, url }: PokemonUrl) {
 
 	const cardColor = getColorByElement(pokemon_element[0])
 
+	function handleClick(pokemon_name: string) {
+		navigate(`/${pokemon_name}`)
+	}
+
 	return (
-		<div className={`${cardColor} rounded-3xl -z-10`}>
+		<div
+			className={`${cardColor} rounded-3xl cursor-pointer`}
+			onClick={() => handleClick(pokemon_name)}
+		>
 			<div className="flex justify-between h-22 text-white bg-no-repeat bg-right bg-contain py-5 px-5 relative overflow-hidden">
-				<img
-					src="/images/poke_ball_bg.svg"
-					className="absolute -right-12 top-10 h-32 -z-10 opacity-80"
-				/>
-				<div>
+				<div className="cursor-pointer">
 					<div className="w-full text-2xl mb-2">{pokemon_name}</div>
 					<div className="grid grid-rows-2 grid-flow-col gap-2">
 						{pokemon_element.map((element, index) => {
@@ -46,8 +51,15 @@ export default function PokemonCard({ name, url }: PokemonUrl) {
 					</div>
 				</div>
 				<div>
-					<img src={pokemon_image} className="h-24" />
+					<img
+						src={pokemon_image}
+						className="h-28 z-20 absolute right-0 top-8"
+					/>
 				</div>
+				<img
+					src="/images/poke_ball_bg.svg"
+					className="absolute -right-12 top-10 h-32 opacity-80 z-10"
+				/>
 			</div>
 		</div>
 	)
