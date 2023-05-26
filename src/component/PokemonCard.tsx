@@ -1,16 +1,24 @@
+import { useQuery } from "@tanstack/react-query"
+import { getPokemonByUrl } from "../api/pokemonAPI"
+import PokemonUrl from "../interface/pokemonUrl"
+import PokemonInfo from "../interface/pokemonInfo"
 import { getColorByElement } from "../utils/color"
 
-type PokemonProps = {
-	pokemon_name: string
-	pokemon_image: string
-	pokemon_element: string[]
-}
+export default function PokemonCard({ name, url }: PokemonUrl) {
+	const { data, isLoading, isError } = useQuery<PokemonInfo>({
+		queryKey: ["getPokemonByUrl", name],
+		queryFn: () => getPokemonByUrl(url),
+	})
 
-export default function PokemonCard({
-	pokemon_name,
-	pokemon_image,
-	pokemon_element,
-}: PokemonProps) {
+	if (isLoading) return <h1>Loading...</h1>
+	if (isError) return <h1>Sorry Something Went Wrong !!!</h1>
+
+	const pokemon_name = name
+	const pokemon_image = data?.sprites.front_default
+	const pokemon_element = data?.types.map((type) => {
+		return type.type.name
+	})
+
 	const cardColor = getColorByElement(pokemon_element[0])
 
 	return (
@@ -26,7 +34,10 @@ export default function PokemonCard({
 						{pokemon_element.map((element, index) => {
 							return (
 								index < 6 && (
-									<div className="rounded-full bg-slate-50 bg-opacity-20 flex justify-center items-center mt-2 text-sm w-16">
+									<div
+										key={element}
+										className="rounded-full bg-slate-50 bg-opacity-20 flex justify-center items-center mt-2 text-sm w-16"
+									>
 										<span>{element}</span>
 									</div>
 								)
