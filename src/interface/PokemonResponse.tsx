@@ -1,4 +1,4 @@
-import PokemonUrl from "./pokemonUrl"
+import PokemonUrl from "./PokemonUrl"
 
 export default interface PokemonResponse {
 	count: number

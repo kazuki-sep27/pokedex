@@ -1,16 +1,7 @@
-interface PokemonSprite {
-	front_default: string
-}
-
-interface PokemonTypes {
-	type: {
-		name: string
-		url: string
-	}
-}
-
 export default interface PokemonInfo {
+	id: number
 	name: string
-	sprites: PokemonSprite
-	types: PokemonTypes[]
+	image: string
+	types: string[]
+	card_color?: string
 }

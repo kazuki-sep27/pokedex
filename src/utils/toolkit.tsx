@@ -1,3 +1,5 @@
+import PokemonInfo from "../interface/PokemonInfo"
+
 function getColorByElement(element: string): string {
 	element = element.toLowerCase()
 
@@ -22,4 +24,25 @@ function getColorByElement(element: string): string {
 	return "bg-gray-500"
 }
 
-export { getColorByElement }
+function getPokemonObjectInfo(data: any): PokemonInfo {
+	const pokemon_id = data?.id
+	const pokemon_name = data?.name
+	const pokemon_image = data?.sprites.front_default
+	const pokemon_element = data?.types.map((type: any) => {
+		return type.type.name
+	})
+
+	const card_color = getColorByElement(pokemon_element[0])
+
+	const pokemon_object: PokemonInfo = {
+		id: pokemon_id,
+		name: pokemon_name,
+		image: pokemon_image,
+		types: pokemon_element,
+		card_color: card_color,
+	}
+
+	return pokemon_object
+}
+
+export { getPokemonObjectInfo }

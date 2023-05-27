@@ -1,5 +1,5 @@
 import axios from "axios"
-import PokemonInfo from "../interface/pokemonInfo"
+import PokemonInfo from "../interface/PokemonInfo"
 
 export async function getPokemonList<PokemonResponse>({
 	pageParam = "",

@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query"
 import { getPokemonByUrl } from "../api/pokemonAPI"
-import PokemonUrl from "../interface/pokemonUrl"
-import PokemonInfo from "../interface/pokemonInfo"
-import { getColorByElement } from "../utils/color"
+import { getPokemonObjectInfo } from "../utils/toolkit"
 import { useNavigate } from "react-router-dom"
+
+import PokemonInfo from "../interface/PokemonInfo"
+import PokemonUrl from "../interface/PokemonUrl"
 
 export default function PokemonCard({ name, url }: PokemonUrl) {
 	const navigate = useNavigate()
-	const { data, isLoading, isError } = useQuery<PokemonInfo>({
+	const { data, isLoading, isError } = useQuery({
 		queryKey: ["getPokemonByUrl", name],
 		queryFn: () => getPokemonByUrl(url),
 	})
@@ -15,28 +16,22 @@ export default function PokemonCard({ name, url }: PokemonUrl) {
 	if (isLoading) return <h1>Loading...</h1>
 	if (isError) return <h1>Sorry Something Went Wrong !!!</h1>
 
-	const pokemon_name = name
-	const pokemon_image = data?.sprites.front_default
-	const pokemon_element = data?.types.map((type) => {
-		return type.type.name
-	})
+	const pokemon: PokemonInfo = getPokemonObjectInfo(data)
 
-	const cardColor = getColorByElement(pokemon_element[0])
-
-	function handleClick(pokemon_name: string) {
-		navigate(`/${pokemon_name}`)
+	function handleClick(pokemon_name: string): void {
+		navigate(`/pokemon/${pokemon_name}`)
 	}
 
 	return (
 		<div
-			className={`${cardColor} rounded-3xl cursor-pointer`}
-			onClick={() => handleClick(pokemon_name)}
+			className={`${pokemon.card_color} rounded-3xl cursor-pointer`}
+			onClick={() => handleClick(name)}
 		>
 			<div className="flex justify-between h-22 text-white bg-no-repeat bg-right bg-contain py-5 px-5 relative overflow-hidden">
 				<div className="cursor-pointer">
-					<div className="w-full text-2xl mb-2">{pokemon_name}</div>
+					<div className="w-full text-2xl mb-2">{pokemon.name}</div>
 					<div className="grid grid-rows-2 grid-flow-col gap-2">
-						{pokemon_element.map((element, index) => {
+						{pokemon.types.map((element, index) => {
 							return (
 								index < 6 && (
 									<div
@@ -52,7 +47,7 @@ export default function PokemonCard({ name, url }: PokemonUrl) {
 				</div>
 				<div>
 					<img
-						src={pokemon_image}
+						src={pokemon.image}
 						className="h-28 z-20 absolute right-0 top-8"
 					/>
 				</div>
