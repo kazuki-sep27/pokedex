@@ -54,6 +54,8 @@ function getPokemonObjectInfo(data: any): PokemonInfo {
 function getEvolutionDetail(evolution_details: EvolutionDetail): string {
 	let show_detail: string = ""
 
+	console.log(evolution_details)
+
 	Object.entries(evolution_details).forEach((entry) => {
 		const [key, value] = entry
 		if (key != "trigger") {
@@ -63,7 +65,12 @@ function getEvolutionDetail(evolution_details: EvolutionDetail): string {
 				value !== "" &&
 				value !== false
 			) {
-				show_detail = value.toString()
+				if (key === "min_level") show_detail = `Level ${value}`
+				if (key === "item") show_detail = value.name
+				if (key === "min_happiness") show_detail = `Happiness ${value}`
+				if (key === "min_beauty") show_detail = `Beauty ${value}`
+				if (key === "min_affection") show_detail = `Affection ${value}`
+				if (key === "time_of_day") show_detail = value
 			}
 		}
 	})

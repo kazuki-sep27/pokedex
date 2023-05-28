@@ -24,7 +24,7 @@ html {
 
 .bg-right-arrow {
 	background-image: url("/images/right.svg");
-	background-size: 60%;
+	background-size: 25%;
 	background-repeat: no-repeat;
 	background-position: center;
 	padding: 10px;

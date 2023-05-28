@@ -33,10 +33,7 @@ export default function PokemonEvolution() {
 							</div>
 							<div className="">{pokemon.name}</div>
 						</div>
-						<div className="bg-right-arrow">
-							<div className="md:text-2xl text-lg">
-								{rows[index + 1].trigger}
-							</div>
+						<div className="bg-right-arrow w-72">
 							<div className="md:text-4xl text-3xl text-center">
 								{rows[index + 1].detail}
 							</div>
