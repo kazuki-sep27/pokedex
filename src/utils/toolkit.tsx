@@ -65,12 +65,13 @@ function getEvolutionDetail(evolution_details: EvolutionDetail): string {
 				value !== "" &&
 				value !== false
 			) {
-				if (key === "min_level") show_detail = `Level ${value}`
-				if (key === "item") show_detail = value.name
-				if (key === "min_happiness") show_detail = `Happiness ${value}`
-				if (key === "min_beauty") show_detail = `Beauty ${value}`
-				if (key === "min_affection") show_detail = `Affection ${value}`
-				if (key === "time_of_day") show_detail = value
+				if (key === "min_level") show_detail = `Level : ${value}`
+				if (key === "item") show_detail = `Use Item : ${value.name}`
+				if (key === "min_happiness") show_detail = `Happiness : ${value}`
+				if (key === "min_beauty") show_detail = `Beauty : ${value}`
+				if (key === "min_affection") show_detail = `Affection : ${value}`
+				if (key === "time_of_day") show_detail = `Time : ${value}`
+				if (key === "location") show_detail = `Location : ${value.name}`
 			}
 		}
 	})
@@ -78,23 +79,31 @@ function getEvolutionDetail(evolution_details: EvolutionDetail): string {
 	return show_detail
 }
 
-function getPokemonForm(evolve: EvolvesTo): PokemonForm {
+function getPokemonForm(
+	evolve: EvolvesTo,
+	evolves_from: PokemonForm
+): PokemonForm {
 	return {
 		name: evolve.species.name,
 		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
 			evolve.species.url.split("/")[6]
 		}.png`,
-		trigger: evolve.evolution_details[0].trigger.name,
+		from: evolves_from,
 		detail: getEvolutionDetail(evolve.evolution_details[0]),
 	}
 }
 
-function pushPokemonForm(evolution_from: Evolution, evolves_to: EvolvesTo[]) {
+function pushPokemonForm(
+	evolution_from: Evolution,
+	evolves_to: EvolvesTo[],
+	evolves_from: PokemonForm
+): Evolution {
 	evolves_to.map((evolve) => {
-		evolution_from.form.push(getPokemonForm(evolve))
+		const pokemon_form = getPokemonForm(evolve, evolves_from)
+		evolution_from.form.push(pokemon_form)
 
 		if (evolve.evolves_to.length > 0)
-			pushPokemonForm(evolution_from, evolve.evolves_to)
+			pushPokemonForm(evolution_from, evolve.evolves_to, pokemon_form)
 	})
 
 	return evolution_from
@@ -104,23 +113,21 @@ function getEvolutionChainObject(
 	species: Species,
 	evolves_to: EvolvesTo[]
 ): Evolution {
-	let evolution_from: Evolution = {
-		form: [
-			{
-				name: species.name,
-				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-					species.url.split("/")[6]
-				}.png`,
-				trigger: "",
-				detail: "",
-			},
-		],
+	const start_form: PokemonForm = {
+		name: species.name,
+		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+			species.url.split("/")[6]
+		}.png`,
+	}
+
+	let evolution_form: Evolution = {
+		form: [start_form],
 	}
 
 	if (evolves_to.length > 0)
-		evolution_from = pushPokemonForm(evolution_from, evolves_to)
+		evolution_form = pushPokemonForm(evolution_form, evolves_to, start_form)
 
-	return evolution_from
+	return evolution_form
 }
 
 export { getPokemonObjectInfo, getEvolutionChainObject }
