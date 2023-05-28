@@ -1,3 +1,3 @@
 export default interface PokemonProps {
-	pokemon_name: string
+	pokemon_id: number
 }

@@ -1,3 +1,9 @@
+import { Evolution, PokemonForm } from "../interface/PokemonEvolution"
+import {
+	EvolvesTo,
+	Species,
+	EvolutionDetail,
+} from "../interface/PokemonEvolutionChain"
 import PokemonInfo from "../interface/PokemonInfo"
 
 function getColorByElement(element: string): string {
@@ -45,4 +51,69 @@ function getPokemonObjectInfo(data: any): PokemonInfo {
 	return pokemon_object
 }
 
-export { getPokemonObjectInfo }
+function getEvolutionDetail(evolution_details: EvolutionDetail): string {
+	let show_detail: string = ""
+
+	Object.entries(evolution_details).forEach((entry) => {
+		const [key, value] = entry
+		if (key != "trigger") {
+			if (
+				value !== null &&
+				value !== undefined &&
+				value !== "" &&
+				value !== false
+			) {
+				show_detail = value.toString()
+			}
+		}
+	})
+
+	return show_detail
+}
+
+function getPokemonForm(evolve: EvolvesTo): PokemonForm {
+	return {
+		name: evolve.species.name,
+		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+			evolve.species.url.split("/")[6]
+		}.png`,
+		trigger: evolve.evolution_details[0].trigger.name,
+		detail: getEvolutionDetail(evolve.evolution_details[0]),
+	}
+}
+
+function pushPokemonForm(evolution_from: Evolution, evolves_to: EvolvesTo[]) {
+	evolves_to.map((evolve) => {
+		evolution_from.form.push(getPokemonForm(evolve))
+
+		if (evolve.evolves_to.length > 0)
+			pushPokemonForm(evolution_from, evolve.evolves_to)
+	})
+
+	return evolution_from
+}
+
+function getEvolutionChainObject(
+	species: Species,
+	evolves_to: EvolvesTo[]
+): Evolution {
+	let evolution_from: Evolution = {
+		form: [
+			{
+				name: species.name,
+				image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+					species.url.split("/")[6]
+				}.png`,
+				trigger: "",
+				detail: "",
+			},
+		],
+	}
+
+	if (evolves_to.length > 0)
+		evolution_from = pushPokemonForm(evolution_from, evolves_to)
+
+	return evolution_from
+}
+
+export { getPokemonObjectInfo, getEvolutionChainObject }

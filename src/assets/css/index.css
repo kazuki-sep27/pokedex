@@ -7,3 +7,25 @@
 html {
 	font-family: "Concert One", cursive;
 }
+
+.bg-pokeball {
+	background-image: url("/images/poke_ball_bg.svg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: invert(10%);
+	-webkit-filter: invert(10%);
+}
+
+.bg-pokeball img {
+	filter: invert(0%);
+	-webkit-filter: invert(0%);
+}
+
+.bg-right-arrow {
+	background-image: url("/images/right.svg");
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 10px;
+}

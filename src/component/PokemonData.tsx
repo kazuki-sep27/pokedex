@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPokemonByUrl } from "../api/pokemonAPI"
-import PokemonProps from "../interface/PokemonProp"
+import { getPokemonByID } from "../api/pokemonAPI"
 import { getPokemonObjectInfo } from "../utils/toolkit"
 import PokemonInfo from "../interface/PokemonInfo"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 
-export default function PokemonData({ pokemon_name }: PokemonProps) {
+export default function PokemonData() {
 	const navigate = useNavigate()
-	const url = "https://pokeapi.co/api/v2/pokemon/" + pokemon_name
+
+	const { pokemon_id } = useParams()
 
 	const { data, isLoading, isError } = useQuery({
-		queryKey: ["getPokemonByUrl", pokemon_name],
-		queryFn: () => getPokemonByUrl(url),
+		queryKey: ["getPokemonByID", pokemon_id],
+		queryFn: () => getPokemonByID(parseInt(pokemon_id!)),
 	})
 
 	if (isLoading) return <h1>Loading...</h1>
