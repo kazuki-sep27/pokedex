@@ -1,8 +1,8 @@
 import { useState } from "react"
 import tab from "../store/tab.json"
 import PokemonEvolution from "./PokemonEvolution"
-import PokemonStat from "./PokemonStat"
 import PokemonMove from "./PokemonMove"
+import PokemonAbout from "./PokemonAbout"
 
 export default function PokemonTap() {
 	const [currentTab, setCurrentTab] = useState("evolution")
@@ -36,8 +36,8 @@ export default function PokemonTap() {
 				</div>
 			</div>
 			<div className="text-black p-5 h-full relative">
+				{currentTab === "about" && <PokemonAbout />}
 				{currentTab === "evolution" && <PokemonEvolution />}
-				{currentTab === "base_stat" && <PokemonStat />}
 				{currentTab === "moves" && <PokemonMove />}
 			</div>
 		</div>

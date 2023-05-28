@@ -1,12 +1,12 @@
 [
 	{
-		"name": "evolution",
-		"text": "Evolution",
+		"name": "about",
+		"text": "About",
 		"class": "text-gray-400 cursor-pointer"
 	},
 	{
-		"name": "base_stat",
-		"text": "Base Stat",
+		"name": "evolution",
+		"text": "Evolution",
 		"class": "text-gray-400 cursor-pointer"
 	},
 	{
