@@ -34,25 +34,23 @@ export default function PokemonEvolution() {
 										<img
 											src={pokemon.from?.image}
 											alt="pokemon"
-											className="w-32 h-32"
+											className="w-32 h-32 p-4"
 										/>
 									</div>
-									<div className="">{pokemon.from?.name}</div>
+									<div className="text-lg">{pokemon.from?.name}</div>
 								</div>
 								<div className="bg-right-arrow w-72">
-									<div className="md:text-3xl text-2xl text-center">
-										{pokemon.detail}
-									</div>
+									<div className="text-2xl text-center">{pokemon.detail}</div>
 								</div>
 								<div className="md:px-8 sm:px-0 text-center text-lg">
 									<div className="bg-pokeball">
 										<img
 											src={pokemon.image}
 											alt="pokemon"
-											className="w-32 h-32"
+											className="w-32 h-32 p-4"
 										/>
 									</div>
-									<div className="text-sm">{pokemon.name}</div>
+									<div className="text-lg">{pokemon.name}</div>
 								</div>
 							</div>
 						)

@@ -51,7 +51,7 @@ export default function PokemonData() {
 				})}
 			</div>
 			<div className="flex justify-center relative">
-				<img src={pokemon.image} className="h-48 z-20 -mt-5" />
+				<img src={pokemon.image} className="h-32 z-20 -mt-5" />
 			</div>
 		</div>
 	)

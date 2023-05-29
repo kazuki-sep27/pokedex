@@ -4,7 +4,8 @@ import {
 	Species,
 	EvolutionDetail,
 } from "../interface/PokemonEvolutionChain"
-import PokemonInfo from "../interface/PokemonInfo"
+import { PokemonInfo } from "../interface/PokemonInfo"
+import PokemonObject from "../interface/PokemonOject"
 
 function getColorByElement(element: string): string {
 	element = element.toLowerCase()
@@ -30,17 +31,17 @@ function getColorByElement(element: string): string {
 	return "bg-gray-500"
 }
 
-function getPokemonObjectInfo(data: any): PokemonInfo {
+function getPokemonObjectInfo(data: PokemonInfo): PokemonObject {
 	const pokemon_id = data?.id
 	const pokemon_name = data?.name
-	const pokemon_image = data?.sprites.front_default
+	const pokemon_image = data?.sprites?.other?.dream_world?.front_default
 	const pokemon_element = data?.types.map((type: any) => {
 		return type.type.name
 	})
 
 	const card_color = getColorByElement(pokemon_element[0])
 
-	const pokemon_object: PokemonInfo = {
+	const pokemon_object: PokemonObject = {
 		id: pokemon_id,
 		name: pokemon_name,
 		image: pokemon_image,
@@ -85,9 +86,9 @@ function getPokemonForm(
 ): PokemonForm {
 	return {
 		name: evolve.species.name,
-		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${
 			evolve.species.url.split("/")[6]
-		}.png`,
+		}.svg`,
 		from: evolves_from,
 		detail: getEvolutionDetail(evolve.evolution_details[0]),
 	}
@@ -115,9 +116,9 @@ function getEvolutionChainObject(
 ): Evolution {
 	const start_form: PokemonForm = {
 		name: species.name,
-		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+		image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world//${
 			species.url.split("/")[6]
-		}.png`,
+		}.svg`,
 	}
 
 	let evolution_form: Evolution = {

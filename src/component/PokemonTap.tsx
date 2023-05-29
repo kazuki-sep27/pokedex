@@ -18,9 +18,9 @@ export default function PokemonTap() {
 
 	return (
 		<div className="relative">
-			<div className="rounded-full bg-white absolute -top-24 w-full py-8 z-0 ">
-				<div className="relative h-36">
-					<div className="grid grid-cols-3 gap-4 content-start text-center text-gray-400 absolute z-50 w-full px-5 py-8">
+			<div className="rounded-full bg-white w-full pt-8 -mt-16 ">
+				<div className="relative h-24">
+					<div className="grid grid-cols-3 gap-4 content-start text-center text-gray-400 w-full px-5 py-8">
 						{tab.map((element, index) => {
 							return (
 								<div
@@ -35,7 +35,7 @@ export default function PokemonTap() {
 					</div>
 				</div>
 			</div>
-			<div className="text-black p-5 h-full relative">
+			<div className="text-black px-5 h-full relative">
 				{currentTab === "about" && <PokemonAbout />}
 				{currentTab === "evolution" && <PokemonEvolution />}
 				{currentTab === "moves" && <PokemonMove />}
