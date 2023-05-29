@@ -1,6 +1,7 @@
-# pokedex
+# Pokedex
 Simple Pokedex by React and PokeAPI
 
+# Screen Shot
 ![home](https://github.com/kazuki-sep27/pokedex/assets/89927619/ef5bab42-7425-4cc3-baab-349255c2b5e0)
 ![move](https://github.com/kazuki-sep27/pokedex/assets/89927619/b100c636-2569-4778-8eba-65c0a0acb8a5)
 ![evolution](https://github.com/kazuki-sep27/pokedex/assets/89927619/8eac350d-0991-48c1-891f-57f358a707a8)
