@@ -3,8 +3,8 @@ import { getPokemonByName } from "../api/pokemonAPI"
 import { getPokemonObjectInfo } from "../utils/toolkit"
 import { useNavigate } from "react-router-dom"
 
-import PokemonInfo from "../interface/PokemonInfo"
 import PokemonUrl from "../interface/PokemonUrl"
+import PokemonObject from "../interface/PokemonOject"
 
 export default function PokemonCard({ name }: PokemonUrl) {
 	const navigate = useNavigate()
@@ -16,7 +16,7 @@ export default function PokemonCard({ name }: PokemonUrl) {
 	if (isLoading) return <h1>Loading...</h1>
 	if (isError) return <h1>Sorry Something Went Wrong !!!</h1>
 
-	const pokemon: PokemonInfo = getPokemonObjectInfo(data)
+	const pokemon: PokemonObject = getPokemonObjectInfo(data)
 
 	function handleClick(pokemon_id: number): void {
 		navigate(`/pokemon/${pokemon_id}`)
@@ -24,7 +24,7 @@ export default function PokemonCard({ name }: PokemonUrl) {
 
 	return (
 		<div
-			className={`${pokemon.card_color} rounded-3xl cursor-pointer`}
+			className={`${pokemon.types[0]} rounded-3xl cursor-pointer`}
 			onClick={() => handleClick(pokemon.id)}
 		>
 			<div className="flex justify-between h-22 text-white bg-no-repeat bg-right bg-contain py-5 px-5 relative overflow-hidden">
@@ -48,7 +48,7 @@ export default function PokemonCard({ name }: PokemonUrl) {
 				<div>
 					<img
 						src={pokemon.image}
-						className="h-28 z-20 absolute right-0 top-8"
+						className="h-20 z-20 absolute right-5 top-12"
 					/>
 				</div>
 				<img
