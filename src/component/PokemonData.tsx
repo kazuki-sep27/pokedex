@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query"
 import { getPokemonByID } from "../api/pokemonAPI"
 import { getPokemonObjectInfo } from "../utils/toolkit"
-import PokemonInfo from "../interface/PokemonInfo"
 import { useNavigate, useParams } from "react-router-dom"
+import PokemonObject from "../interface/PokemonOject"
 
 export default function PokemonData() {
 	const navigate = useNavigate()
@@ -17,14 +17,14 @@ export default function PokemonData() {
 	if (isLoading) return <h1>Loading...</h1>
 	if (isError) return <h1>Sorry Something Went Wrong !!!</h1>
 
-	const pokemon: PokemonInfo = getPokemonObjectInfo(data)
+	const pokemon: PokemonObject = getPokemonObjectInfo(data)
 
 	function handleClickBack(): void {
 		navigate(`/`)
 	}
 
 	return (
-		<div className={`${pokemon.card_color} p-3 relative`}>
+		<div className={`${pokemon.types[0]} p-3 relative`}>
 			<div
 				key="topNav"
 				onClick={() => handleClickBack()}

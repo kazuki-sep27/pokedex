@@ -24,7 +24,7 @@ export default function PokemonCard({ name }: PokemonUrl) {
 
 	return (
 		<div
-			className={`${pokemon.card_color} rounded-3xl cursor-pointer`}
+			className={`${pokemon.types[0]} rounded-3xl cursor-pointer`}
 			onClick={() => handleClick(pokemon.id)}
 		>
 			<div className="flex justify-between h-22 text-white bg-no-repeat bg-right bg-contain py-5 px-5 relative overflow-hidden">
