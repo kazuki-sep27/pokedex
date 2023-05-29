@@ -1,3 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+	font-family: "Concert One", cursive;
+}
+h1 {
+	font-size: 1.8rem;
+	font-weight: 500;
+}
+.bg-pokeball {
+	background-image: url("/images/poke_ball_bg.svg");
+	background-size: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	filter: invert(10%);
+	-webkit-filter: invert(10%);
+}
+
+.bg-pokeball img {
+	filter: invert(0%);
+	-webkit-filter: invert(0%);
+}
+
+.bg-right-arrow {
+	background-image: url("/images/right.svg");
+	background-size: 18%;
+	background-repeat: no-repeat;
+	background-position: center;
+	padding: 10px;
+}

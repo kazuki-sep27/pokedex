@@ -1,0 +1,17 @@
+[
+	{
+		"name": "about",
+		"text": "About",
+		"class": "text-gray-400 cursor-pointer"
+	},
+	{
+		"name": "evolution",
+		"text": "Evolution",
+		"class": "text-gray-400 cursor-pointer"
+	},
+	{
+		"name": "moves",
+		"text": "Move",
+		"class": "text-gray-400 cursor-pointer"
+	}
+]
