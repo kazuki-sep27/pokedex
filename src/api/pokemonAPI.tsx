@@ -1,7 +1,8 @@
 import axios from "axios"
-import PokemonInfo from "../interface/PokemonInfo"
 import { EvolutionChain } from "../interface/PokemonEvolutionChain"
 import { PokemonSpecies } from "../interface/PokemonSpecies"
+import { PokemonMove } from "../interface/PokemonMove"
+import { PokemonInfo } from "../interface/PokemonInfo"
 
 export async function getPokemonList<PokemonResponse>({
 	pageParam = "",
@@ -37,6 +38,13 @@ export async function getPokemonSpecies(
 	const call_url = "https://pokeapi.co/api/v2/pokemon-species/" + pokemon_id
 
 	const res = await axios.get<PokemonSpecies>(call_url)
+	return res.data
+}
+
+export async function getPokemonMove(move_name: string): Promise<PokemonMove> {
+	const call_url = "https://pokeapi.co/api/v2/move/" + move_name
+
+	const res = await axios.get<PokemonMove>(call_url)
 	return res.data
 }
 
