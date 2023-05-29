@@ -7,7 +7,10 @@
 html {
 	font-family: "Concert One", cursive;
 }
-
+h1 {
+	font-size: 1.8rem;
+	font-weight: 500;
+}
 .bg-pokeball {
 	background-image: url("/images/poke_ball_bg.svg");
 	background-size: 100%;
@@ -24,7 +27,7 @@ html {
 
 .bg-right-arrow {
 	background-image: url("/images/right.svg");
-	background-size: 25%;
+	background-size: 18%;
 	background-repeat: no-repeat;
 	background-position: center;
 	padding: 10px;

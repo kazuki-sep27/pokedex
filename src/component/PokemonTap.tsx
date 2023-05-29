@@ -5,7 +5,7 @@ import PokemonMove from "./PokemonMove"
 import PokemonAbout from "./PokemonAbout"
 
 export default function PokemonTap() {
-	const [currentTab, setCurrentTab] = useState("move")
+	const [currentTab, setCurrentTab] = useState("about")
 
 	const currentTabClass = "text-black border-b-2 border-blue-500"
 

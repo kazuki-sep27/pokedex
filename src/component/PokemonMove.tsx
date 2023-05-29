@@ -18,10 +18,8 @@ export default function PokemonMove() {
 	const pokemon_move_set = data.moves
 	return (
 		<div className="w-full">
-			<div className="flex items-center justify-between pb-5">
-				<h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
-					All Moves
-				</h5>
+			<div className="flex items-center justify-between pb-3">
+				<h1>All Moves</h1>
 			</div>
 			<div className="flow-root overflow-y-auto max-h-[32rem] scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
 				<ul

@@ -21,7 +21,7 @@ export default function PokemonEvolution() {
 
 	return (
 		<div>
-			<div className="text-2xl">Evolution Chain</div>
+			<h1>Evolution Chain</h1>
 			{evolution_form.form.length == 1 ? (
 				<div className="text-6xl text-center text-gray-300 p-16">None</div>
 			) : (
