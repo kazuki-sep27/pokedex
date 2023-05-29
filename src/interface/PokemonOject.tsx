@@ -3,5 +3,4 @@ export default interface PokemonObject {
 	name: string
 	image?: string
 	types: string[]
-	card_color: string
 }
